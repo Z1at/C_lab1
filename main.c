@@ -211,7 +211,7 @@ int main(int argc, char *argv[]) {
     }
 
     FILE* file;
-    if (!file_open("C:\\Users\\Zlat\\CLionProjects\\untitled\\input.bmp", &file, "rb")) {
+    if (!file_open("C:\\Users\\Zlat\\CLionProjects\\untitled\\input\\input.bmp", &file, "rb")) {
         return -2;
     }
 
@@ -236,7 +236,7 @@ int main(int argc, char *argv[]) {
     head_read(file, &head);
 
 
-    if (!file_open("C:\\Users\\Zlat\\CLionProjects\\untitled\\output.bmp", &res_file, "wb")) {
+    if (!file_open("C:\\Users\\Zlat\\CLionProjects\\untitled\\output\\output.bmp", &res_file, "wb")) {
         image_destroy(&res);
         return -2;
     }
