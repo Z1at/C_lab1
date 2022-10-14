@@ -146,9 +146,6 @@ bool from_bmp(FILE* in, struct image* image){
 
 bool to_bmp(FILE* out, const struct image* image){
     struct bmp_header header = create_header(image);
-//    struct bmp_header header = {0};
-//    rewind(in);
-//    head_read(in, &header);
     if(!fwrite(&header, sizeof(struct bmp_header), 1, out)){
         return false;
     }
@@ -163,21 +160,18 @@ bool to_bmp(FILE* out, const struct image* image){
     if(image->data == NULL){
         return false;
     }
-    printf("%" PRIu32 "\n", header.bOffBits);
 
     for(size_t i = 0; i < image->height; i++){
-        printf("%" PRIu32 "\n", header.bOffBits);
 
         if(!fwrite(image->data + i * image->width, image->width * sizeof(struct pixel), 1, out)){
             return false;
         }
-        printf("%" PRIu32 "\n", header.bOffBits);
-
-        if(!fwrite(paddings, padding, 1, out)){
-            return false;
+        if(padding != 0) {
+            if (!fwrite(paddings, padding, 1, out)) {
+                return false;
+            }
         }
     }
-    printf("%" PRIu32 "\n", header.bOffBits);
 
     return true;
 }
@@ -211,7 +205,7 @@ int main(int argc, char *argv[]) {
     }
 
     FILE* file;
-    if (!file_open("C:\\Users\\Zlat\\CLionProjects\\untitled\\input\\input.bmp", &file, "rb")) {
+    if (!file_open("C:\\Users\\Zlat\\CLionProjects\\untitled\\input\\input2.bmp", &file, "rb")) {
         return -2;
     }
 
@@ -231,12 +225,12 @@ int main(int argc, char *argv[]) {
     image_destroy(&img);
     FILE* res_file;
 
-    rewind(file);
-    struct bmp_header head;
-    head_read(file, &head);
+//    rewind(file);
+//    struct bmp_header head;
+//    head_read(file, &head);
 
 
-    if (!file_open("C:\\Users\\Zlat\\CLionProjects\\untitled\\output\\output.bmp", &res_file, "wb")) {
+    if (!file_open("C:\\Users\\Zlat\\CLionProjects\\untitled\\output\\output2.bmp", &res_file, "wb")) {
         image_destroy(&res);
         return -2;
     }
