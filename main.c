@@ -135,9 +135,11 @@ bool from_bmp(FILE* in, struct image* image){
                 return false;
             }
         }
-        if(fseek(in, padding, SEEK_CUR)){
-            image_destroy(image);
-            return false;
+        if(padding != 0) {
+            if (fseek(in, padding, SEEK_CUR)) {
+                image_destroy(image);
+                return false;
+            }
         }
     }
 
@@ -205,7 +207,7 @@ int main(int argc, char *argv[]) {
     }
 
     FILE* file;
-    if (!file_open("C:\\Users\\Zlat\\CLionProjects\\untitled\\input\\input2.bmp", &file, "rb")) {
+    if (!file_open("C:\\Users\\Zlat\\CLionProjects\\untitled\\input\\input4.bmp", &file, "rb")) {
         return -2;
     }
 
@@ -225,12 +227,7 @@ int main(int argc, char *argv[]) {
     image_destroy(&img);
     FILE* res_file;
 
-//    rewind(file);
-//    struct bmp_header head;
-//    head_read(file, &head);
-
-
-    if (!file_open("C:\\Users\\Zlat\\CLionProjects\\untitled\\output\\output2.bmp", &res_file, "wb")) {
+    if (!file_open("C:\\Users\\Zlat\\CLionProjects\\untitled\\output\\output4.bmp", &res_file, "wb")) {
         image_destroy(&res);
         return -2;
     }
