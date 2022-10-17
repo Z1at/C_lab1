@@ -81,8 +81,9 @@ struct __attribute__((packed)) bmp_header {
 };
 
 size_t size_of_padding(const size_t width){
-    if(width % 4 == 0) return 0;
-    return 4 - ((width * sizeof(struct pixel)) % 4);
+//    if(width % 4 == 0) return 0;
+//    return 4 - ((width * sizeof(struct pixel)) % 4);
+    return width % 4;
 }
 
 bool head_read(FILE* file, struct bmp_header* header){
@@ -128,9 +129,15 @@ bool from_bmp(FILE* in, struct image* image){
     *image = image_create(header.biWidth, header.biHeight);
     const size_t padding = size_of_padding(image->width);
 
+    printf("%" PRIu32 "\n", header.biHeight);
+    printf("%" PRIu32 "\n", header.biWidth);
+    printf("%" PRIu32 "\n", header.bOffBits);
+    printf("%" PRIu32 "\n", header.biSize);
+
+
     for(size_t i = 0; i < image->height; i++){
         for(size_t j = 0; j < image->width; j++){
-            if(!fread(&(image->data[image->width * i + j]), sizeof(struct pixel), 1, in)){
+            if(!fread(&(image->data[get_index(j, i, image->width)]), sizeof(struct pixel), 1, in)){
                 image_destroy(image);
                 return false;
             }
@@ -146,11 +153,21 @@ bool from_bmp(FILE* in, struct image* image){
     return true;
 }
 
-bool to_bmp(FILE* out, const struct image* image){
+bool to_bmp(FILE* out, const struct image* image, FILE* exampleFile){
     struct bmp_header header = create_header(image);
+//    struct bmp_header header;
+//    rewind(exampleFile);
+//    head_read(exampleFile, &header);
+
     if(!fwrite(&header, sizeof(struct bmp_header), 1, out)){
         return false;
     }
+
+    printf("\n");
+    printf("%" PRIu32 "\n", header.biHeight);
+    printf("%" PRIu32 "\n", header.biWidth);
+    printf("%" PRIu32 "\n", header.bOffBits);
+    printf("%" PRIu32 "\n", header.biSize);
 
     if(fseek(out, header.bOffBits, SEEK_SET)){
         return false;
@@ -163,12 +180,31 @@ bool to_bmp(FILE* out, const struct image* image){
         return false;
     }
 
-    for(size_t i = 0; i < image->height; i++){
+    printf("%zu", padding);
 
-        if(!fwrite(image->data + i * image->width, image->width * sizeof(struct pixel), 1, out)){
-            return false;
+    if(padding == 0){
+        for(size_t i = 28; i < image->height; i++) {
+            for (size_t j = 0; j < image->width; j++) {
+                if (!fwrite(&image->data[(i * image->width) + j], sizeof(struct pixel), 1, out)) {
+                    return false;
+                }
+            }
         }
-        if(padding != 0) {
+        for(size_t i = 0; i < 28; i++){
+            for (size_t j = 0; j < image->width; j++) {
+                if (!fwrite(&image->data[(i * image->width) + j], sizeof(struct pixel), 1, out)) {
+                    return false;
+                }
+            }
+        }
+    }
+    else{
+        for(size_t i = 0; i < image->height; i++){
+            for(size_t j = 0; j < image->width; j++) {
+                if (!fwrite(&image->data[get_index(j, i, image->width)], sizeof(struct pixel), 1, out)) {
+                    return false;
+                }
+            }
             if (!fwrite(paddings, padding, 1, out)) {
                 return false;
             }
@@ -207,7 +243,7 @@ int main(int argc, char *argv[]) {
     }
 
     FILE* file;
-    if (!file_open("C:\\Users\\Zlat\\CLionProjects\\untitled\\input\\input4.bmp", &file, "rb")) {
+    if (!file_open("C:\\Users\\Zlat\\CLionProjects\\untitled\\input\\input5.bmp", &file, "rb")) {
         return -2;
     }
 
@@ -217,29 +253,31 @@ int main(int argc, char *argv[]) {
         perror("error: bmp reader failed");
         return -3;
     }
-    if (!file_close(file)) {
-        perror("error: close file failed");
-        image_destroy(&img);
-        return -4;
-    }
+
 
     struct image res = rotate(img);
+//    struct image res = img;
     image_destroy(&img);
     FILE* res_file;
 
-    if (!file_open("C:\\Users\\Zlat\\CLionProjects\\untitled\\output\\output4.bmp", &res_file, "wb")) {
+    if (!file_open("C:\\Users\\Zlat\\CLionProjects\\untitled\\output\\output5.bmp", &res_file, "wb")) {
         image_destroy(&res);
         return -2;
     }
 
-    if (!to_bmp(res_file, &res)) {
+    if (!to_bmp(res_file, &res, file)) {
         perror("error: bmp writer failed");
         image_destroy(&res);
         file_close(res_file);
         return -5;
     }
 
+//    if (!file_close(file)) {
+//        perror("error: close file failed");
+//        image_destroy(&img);
+//        return -4;
+//    }
+
     image_destroy(&res);
     return file_close(res_file);
-//
 }
