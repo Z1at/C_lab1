@@ -1,8 +1,0 @@
-//
-// Created by Zlat on 10/15/2022.
-//
-
-#ifndef UNTITLED_BIVARIATE_IMAGE_H
-#define UNTITLED_BIVARIATE_IMAGE_H
-
-#endif //UNTITLED_BIVARIATE_IMAGE_H
