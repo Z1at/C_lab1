@@ -1,8 +1,8 @@
 #include "closeFile.h"
 
-bool closeFile(FILE* file){
+enum closeStatus closeFile(FILE* file){
     if(fclose(file) == EOF){
-        return false;
+        return CLOSE_ERROR;
     }
-    return true;
+    return CLOSE_OK;
 }

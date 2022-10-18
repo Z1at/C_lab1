@@ -1,9 +1,9 @@
 #include "openFile.h"
 
-bool openFile(const char* fileName, FILE** file, const char* type){
+enum openStatus openFile(const char* fileName, FILE** file, const char* type){
     *file = fopen(fileName, type);
     if(*file == NULL){
-        return false;
+        return OPEN_ERROR;
     }
-    return true;
+    return OPEN_OK;
 }

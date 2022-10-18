@@ -3,6 +3,10 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+enum openStatus{
+    OPEN_ERROR,
+    OPEN_OK
+};
 
-bool openFile(const char* fileName, FILE** file, const char* type);
+enum openStatus openFile(const char* fileName, FILE** file, const char* type);
 #endif //UNTITLED_OPENFILE_H

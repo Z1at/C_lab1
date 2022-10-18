@@ -3,6 +3,10 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+enum closeStatus{
+    CLOSE_OK,
+    CLOSE_ERROR
+};
 
-bool closeFile(FILE* file);
+enum closeStatus closeFile(FILE* file);
 #endif //UNTITLED_CLOSEFILE_H
