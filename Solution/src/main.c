@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdint.h>
 
 #include "image/image.h"
 #include "inputOutput/fromToBmp.h"
