@@ -1,9 +1,9 @@
 #ifndef UNTITLED_FROMTOBMP_H
 #define UNTITLED_FROMTOBMP_H
 
-#include <stdio.h>
-#include <stdbool.h>
 #include "../image/image.h"
+#include <stdbool.h>
+#include <stdio.h>
 
 struct __attribute__((packed)) bmp_header {
     uint16_t bfType;
@@ -42,6 +42,6 @@ enum write_status  {
 };
 
 
-enum read_status fromBmp(FILE* out, struct image* image);
+enum read_status fromBmp(FILE* in, struct image* image);
 enum write_status toBmp(FILE* out, const struct image* image);
 #endif //UNTITLED_FROMTOBMP_H

@@ -1,0 +1,19 @@
+# ninja log v5
+252	577	6878035841537133	untitled.exe	48a86e18c20230c5
+19	329	6877916951747767	CMakeFiles/untitled.dir/Solution/src/openClose/openFile.c.obj	e8b9b32b18c828bc
+13	249	6878035838428851	CMakeFiles/untitled.dir/Solution/src/main.c.obj	78914ed573145dcc
+11	132	6877579321386946	CMakeFiles/untitled.dir/Solution/src/inputOutput/toBmp.c.obj	5be7901bee01c987
+2	218	6878049890451616	build.ninja	94b7b76cb9e5370c
+1	97	6877524203541305	CMakeFiles/untitled.dir/Solution/main.c.obj	2270f9b82a7282b3
+3	91	6877567367468546	CMakeFiles/untitled.dir/Solution/src/tst/tst.c.obj	24e5a5eb18b98665
+13	160	6877572692753896	CMakeFiles/untitled.dir/Solution/src/image/image.c.obj	c1546d4aa7711874
+5	128	6877579321346941	CMakeFiles/untitled.dir/Solution/src/inputOutput/fromBmp.c.obj	6a61812e805f83ac
+188	403	6877572695004096	CMakeFiles/untitled.dir/Solution/src/rotation/rotate.c.obj	2819e8de30584b1b
+330	464	6877916953381267	CMakeFiles/untitled.dir/Solution/src/openClose/closeFile.c.obj	a35a8dd613cf14d8
+11	341	6877916952020300	CMakeFiles/untitled.dir/Solution/src/inputOutput/fromToBmp.c.obj	f14c496887e71705
+29	332	6878052915812535	CMakeFiles/untitled.dir/Solution/src/util/utilsForBmp.c.obj	bafb045210ebca71
+14	362	6878052915882535	CMakeFiles/untitled.dir/Solution/src/inputOutput/fromToBmp.c.obj	f14c496887e71705
+5	366	6878052915902543	CMakeFiles/untitled.dir/Solution/src/main.c.obj	78914ed573145dcc
+366	761	6878052921164573	untitled.exe	2b36c94a3e35afbb
+5	159	6878194392222178	CMakeFiles/untitled.dir/Solution/src/main.c.obj	78914ed573145dcc
+160	330	6878194393883900	untitled.exe	2b36c94a3e35afbb

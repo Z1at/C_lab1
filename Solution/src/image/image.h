@@ -6,6 +6,7 @@
 #define UNTITLED_IMAGE_H
 
 #include <stdint.h>
+#include <stdio.h>
 
 struct __attribute__ ((packed)) pixel {
     uint8_t b;

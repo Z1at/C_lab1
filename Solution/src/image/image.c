@@ -1,6 +1,6 @@
+#include "image.h"
 #include <stdint.h>
 #include <stdlib.h>
-#include "image.h"
 
 size_t findIndex(const size_t x, const size_t y, const size_t width){
     return y * width + x;

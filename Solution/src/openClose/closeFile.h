@@ -1,8 +1,8 @@
 #ifndef UNTITLED_CLOSEFILE_H
 #define UNTITLED_CLOSEFILE_H
 
-#include <stdio.h>
 #include <stdbool.h>
+#include <stdio.h>
 enum closeStatus{
     CLOSE_OK,
     CLOSE_ERROR

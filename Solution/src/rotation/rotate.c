@@ -1,7 +1,5 @@
-#include <stdio.h>
-#include <stdint.h>
-#include <stdlib.h>
 #include "../image/image.h"
+#include <stdlib.h>
 
 struct image rotate(const struct image source){
     if(source.data == NULL){
